@@ -1,9 +1,9 @@
 const { bot } = require('../core/bot');
 
-const message = async (ctx) => {
+const message = (ctx) => {
   const userId = ctx.from.id;
-  const members = await ctx.getChatMembersCount(userId);
-  console.log(members);
+
+  console.log(ctx.message);
 };
 
 module.exports = { message };
