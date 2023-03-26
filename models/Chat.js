@@ -26,12 +26,27 @@ const MemberSchema = new mongoose.Schema({
 });
 
 const ChatSchema = new mongoose.Schema({
-  chatId: {
+  id: {
     type: Number,
     required: true,
   },
 
-  member: {
+  title: {
+    type: String,
+    required: true,
+  },
+
+  type: {
+    type: String,
+    required: true,
+  },
+
+  all_members_are_administrators: {
+    type: Boolean,
+    required: true,
+  },
+
+  members: {
     type: [MemberSchema],
     default: [],
   },
