@@ -1,20 +1,10 @@
 const { bot } = require('../core/bot');
-const { messages } = require('../lib/message');
-const Chat = require('../models/Chat');
+const { joinChat } = require('../actions/joinChat');
+const { joinUser } = require('../actions/joinUser');
+const { addUserToChat } = require('../actions/addUserToChat');
 
 bot.command('join', async (ctx) => {
-  const newUser = { ...ctx.message.from };
-  const newChat = { ...ctx.message.chat };
-
-  let chat = await Chat.findOne({ id: newChat.id });
-
-  if (!chat) {
-    newChat.members = [newUser];
-    console.log('newChat', newChat);
-    chat = await Chat.create(newChat);
-  } else {
-  }
-
-  console.log('chat', chat);
-  ctx.reply(messages['join']);
+  await joinChat(ctx);
+  await joinUser(ctx);
+  await addUserToChat(ctx);
 });

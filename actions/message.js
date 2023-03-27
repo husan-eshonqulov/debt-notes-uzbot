@@ -1,5 +1,3 @@
-const { bot } = require('../core/bot');
-
 const message = (ctx) => {
   const userId = ctx.from.id;
 
