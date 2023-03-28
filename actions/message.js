@@ -1,17 +1,14 @@
-const {
-  getWords,
-  getCash,
-  getTagedUserId,
-  getChatUsers,
-} = require('../lib/helper');
-const Chat = require('../models/Chat');
+const { getHashtags, noteDebt, noteCredit } = require('../lib/helper');
 
 const message = async (ctx) => {
-  const msg = ctx.message.text;
-  const words = getWords(msg);
-  const cash = getCash(words);
-  const tags = getTagedUserId(ctx, words);
-  const chatUsers = await getChatUsers(ctx, Chat);
+  const msg = ctx.message;
+  // console.log(ctx.getChatMember('husan_eshonqulov'));
+  const hashtags = getHashtags(msg);
+  if (hashtags.includes('debt') && !hashtags.includes('credit')) {
+    noteDebt(msg);
+  } else if (hashtags.includes('credit') && !hashtags.includes('debt')) {
+    noteCredit(msg);
+  }
 };
 
 module.exports = { message };
