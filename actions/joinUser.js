@@ -7,6 +7,7 @@ const joinUser = async (ctx) => {
     if (!user) {
       user = await User.create({ id: userId });
     }
+    return user;
   } catch (err) {
     console.log(err);
   }
